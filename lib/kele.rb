@@ -24,6 +24,15 @@ class Kele
     JSON.parse(response.body)
   end
   
+  def create_submission(checkpoint_id, assignment_branch, assignment_commit_link, comment, enrollment_id)
+    response = self.class.post(api_url("checkpoint_submissions"), 
+    :query => { :checkpoint_id => checkpoint_id, :assignment_branch => assignment_branch, :assignment_commit_link => assignment_commit_link, :comment => comment, :enrollment_id => enrollment_id },
+    
+    headers: {"authorization" => @auth_token})
+    
+    JSON.parse(response.body)
+  end
+  
   def api_url(endpoint)
     "https://www.bloc.io/api/v1/#{endpoint}"
   end
